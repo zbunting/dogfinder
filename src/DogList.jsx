@@ -1,31 +1,32 @@
+import { useState } from "react";
+
 /** Dog List Component
  *
- *  Props: fetchDogs, dogs
- *  State: None
+ * Props:
+ * fetchDogs: function
+ * dogs: array of objects
+ * eg. [ { name: string, age: number, src: string, facts: ["string"...] } ...]
+ *
+ * State:
+ * None
+ *
+ * App -> DogList
  *
  */
 
 function DogList({ fetchDogs, dogs }) {
-
-  async function renameThis() {
-    const response = await fetch("http://localhost:5001/dogs");
-    const result = await response.json();
-    console.log({ result });
-    fetchDogs(result);
+  if(dogs.length === 0) {
+    fetchDogs();
+    return <p>Loading...</p>
   }
-
-  // console.log({ dogs });
 
   return (
     <ul>
-      {dogs.length === 0 &&
-        <button onClick={renameThis}>Get Dogs!</button>
-      }
       {dogs.length !== 0 &&
         dogs.map(dog => (
-          <li>
-            <b>dog.name</b>
-            <img src={`./public/${dog.src}.jpg`} alt={`Picture of ${dog.name}`} />
+          <li key={dog.name}>
+            <b>{dog.name}</b>
+            <img src={`/${dog.src}.jpg`} alt={`Picture of ${dog.name}`} />
           </li>
         ))
       }
