@@ -25,7 +25,7 @@ function App() {
       <BrowserRouter>
         <Nav dogNames={dogs.map(dog => dog.name)} />
         <Routes>
-          <Route path="/dogs" element={<DogList fetchDogs={handleDogList} />} />
+          <Route path="/dogs" element={<DogList fetchDogs={handleDogList} dogs={dogs}/>} />
           <Route path="/dogs/:name" element={<DogDetails dogs={dogs} />} />
           <Route path="*" element={<Navigate to="/dogs" />} />
         </Routes>
