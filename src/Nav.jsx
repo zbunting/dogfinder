@@ -1,6 +1,16 @@
 import { NavLink } from "react-router-dom";
 
-
+/** Nav component
+ *
+ * Props:
+ * dogNames: array of dog names
+ *
+ * State:
+ * None
+ *
+ * App -> Nav -> NavLink
+ *
+*/
 function Nav({ dogNames }) {
 
   const activeStyle = {
@@ -11,8 +21,19 @@ function Nav({ dogNames }) {
   return (
     <nav>
       <ul>
+        <li>
+          <NavLink
+            to={'/dogs'}
+            style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }
+            end
+          >
+            Home
+          </NavLink>
+        </li>
         {dogNames.map(dogName => (
-          <li>
+          <li key={dogName}>
             <NavLink to={`/dogs/${dogName}`}
               style={({ isActive }) =>
                 isActive ? activeStyle : undefined
