@@ -5,21 +5,30 @@
  *
  */
 
-async function DogList({ fetchDogs, dogs }) {
+function DogList({ fetchDogs, dogs }) {
 
-  if (dogs.length === 0) {
-    const response = await fetch("localhost:5001/dogs");
+  async function renameThis() {
+    const response = await fetch("http://localhost:5001/dogs");
     const result = await response.json();
+    console.log({ result });
     fetchDogs(result);
   }
 
+  // console.log({ dogs });
+
   return (
     <ul>
-      {result.map(dog => (
-        <li>
-          <b>dog.name</b>, <img src={dog.src}></img>
-        </li>
-      ))}
+      {dogs.length === 0 &&
+        <button onClick={renameThis}>Get Dogs!</button>
+      }
+      {dogs.length !== 0 &&
+        dogs.map(dog => (
+          <li>
+            <b>dog.name</b>
+            <img src={`./public/${dog.src}.jpg`} alt={`Picture of ${dog.name}`} />
+          </li>
+        ))
+      }
     </ul>
   );
 }
