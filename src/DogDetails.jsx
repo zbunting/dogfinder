@@ -1,5 +1,3 @@
-import { useParams } from "react-router-dom";
-
 /** DogDetails Component
  *
  * Props:
@@ -19,7 +17,7 @@ function DogDetails({ dog }) {
   return (
     <div>
       <h1>Name: {dog.name}</h1>
-      <img src={`/${dog.src}.jpg`} alt={`Picture of ${dog.name}`} />
+      <img src={`/${dog.src}.jpg`} alt={`${dog.name}`} />
       <h3>Age: {dog.age}</h3>
       <p>Facts: {dog.facts.join(" ")}</p>
     </div>
