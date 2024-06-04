@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
  * State:
  * None
  *
- * App -> Nav -> NavLink
+ * App -> Nav
  *
 */
 function Nav({ dogNames }) {
@@ -18,6 +18,7 @@ function Nav({ dogNames }) {
     textDecoration: "none"
   };
 
+  //TODO: put CSS in its own file
   return (
     <nav>
       <ul>
