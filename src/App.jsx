@@ -11,14 +11,14 @@ import { useState } from 'react';
  *
  * State:
  * - dogs: array of objects
- *   initial state is []
+ *   initial state is null
  *   eg. [ { name: string, age: number, src: string, facts: ["string"...] }... ]
  *
  * App -> {BrowserRouter, Nav, Routes, Route, DogList, DogFinder}
 */
 
 function App() {
-  const [dogs, setDogs] = useState([]);
+  const [dogs, setDogs] = useState(null);
 
   async function fetchDogs() {
     const response = await fetch("http://localhost:5001/dogs");
@@ -26,12 +26,20 @@ function App() {
     setDogs(result);
   }
 
+  if(dogs === null) {
+    fetchDogs();
+    return <p>Loading...</p>
+  }
+  else if(dogs.length === 0) {
+    return <p>No dogs found</p>
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <Nav dogNames={dogs.map(dog => dog.name)} />
         <Routes>
-          <Route path="/dogs" element={<DogList fetchDogs={fetchDogs} dogs={dogs} />} />
+          <Route path="/dogs" element={<DogList dogs={dogs} />} />
           <Route path="/dogs/:name" element={<DogFinder dogs={dogs}/>} />
           <Route path="*" element={<Navigate to="/dogs" />} />
         </Routes>

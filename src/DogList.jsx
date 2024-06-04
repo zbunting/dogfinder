@@ -1,9 +1,7 @@
-import { useState } from "react";
 
 /** Dog List Component
  *
  * Props:
- * fetchDogs: function
  * dogs: array of objects
  * eg. [ { name: string, age: number, src: string, facts: ["string"...] } ...]
  *
@@ -14,19 +12,16 @@ import { useState } from "react";
  *
  */
 
-function DogList({ fetchDogs, dogs }) {
-  if(dogs.length === 0) {
-    fetchDogs();
-    return <p>Loading...</p>
-  }
+function DogList({ dogs }) {
 
+  //NOTE: uuid() would be safer key if names can be dupes
   return (
     <ul>
-      {dogs.length !== 0 &&
+      {
         dogs.map(dog => (
           <li key={dog.name}>
             <b>{dog.name}</b>
-            <img src={`/${dog.src}.jpg`} alt={`Picture of ${dog.name}`} />
+            <img src={`/${dog.src}.jpg`} alt={`${dog.name}`} />
           </li>
         ))
       }
